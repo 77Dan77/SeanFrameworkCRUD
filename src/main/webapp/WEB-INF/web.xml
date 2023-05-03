@@ -4,46 +4,80 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-<!--    <filter>-->
-<!--        <filter-name>Seam Filter</filter-name>-->
-<!--        <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>Seam Filter</filter-name>-->
-<!--        <url-pattern>/*</url-pattern>-->
-<!--    </filter-mapping>-->
 
-<!--    <context-param>-->
-<!--        <param-name>javax.faces.application.CONFIG_FILES</param-name>-->
-<!--        <param-value>/WEB-INF/faces-config.xml</param-value>-->
-<!--    </context-param>-->
-<!--    <context-param>-->
-<!--        <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>-->
-<!--        <param-value>true</param-value>-->
-<!--    </context-param>-->
+       <display-name>SeamPrimeFacesGlassfish</display-name>
 
-<!--    -->
-    <listener>
-        <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
-    </listener>
+        <context-param>
+            <param-name>javax.faces.PROJECT_STAGE</param-name>
+            <param-value>Development</param-value>
+        </context-param>
+        <context-param>
+            <param-name>javax.faces.CONFIG_FILES</param-name>
+            <param-value>/WEB-INF/faces-config.xml</param-value>
+        </context-param>
+        <context-param>
+            <param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
+            <param-value>true</param-value>
+        </context-param>
 
-    <context-param>
-        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
-        <param-value>.xhtml</param-value>
-    </context-param>
+        <listener>
+            <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
+        </listener>
 
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+        <servlet>
+            <servlet-name>Faces Servlet</servlet-name>
+            <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+            <load-on-startup>1</load-on-startup>
+        </servlet>
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.seam</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
+        <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
 
-    <session-config>
-        <session-timeout>10</session-timeout>
-    </session-config>
+    <filter>
+        <filter-name>Seam Filter</filter-name>
+        <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Seam Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+
+<!--    <listener>-->
+<!--        <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>-->
+<!--    </listener>-->
+
+<!--    <context-param>-->
+<!--        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>-->
+<!--        <param-value>.xhtml</param-value>-->
+<!--    </context-param>-->
+
+<!--    <servlet>-->
+<!--        <servlet-name>Faces Servlet</servlet-name>-->
+<!--        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Faces Servlet</servlet-name>-->
+<!--        <url-pattern>*.seam</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--    <session-config>-->
+<!--        <session-timeout>10</session-timeout>-->
+<!--    </session-config>-->
 </web-app>

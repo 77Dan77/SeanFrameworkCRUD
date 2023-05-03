@@ -4,6 +4,10 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
               version="2.0">
     <application>
-        <el-resolver>org.jboss.seam.el.SeamELResolver</el-resolver>
+        <default-render-kit-id>PRIMEFACES_MOBILE</default-render-kit-id>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>messages</var>
+        </resource-bundle>
     </application>
 </faces-config>

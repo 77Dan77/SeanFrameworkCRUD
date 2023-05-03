@@ -1,31 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:s="http://jboss.org/schema/seam/taglib"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Register New User</title>
+    <title>User CRUD Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Styles -->
+    <h:outputStylesheet library="css" name="style.css" />
 </h:head>
-
 <h:body>
-    <h:head>
-        <f:view>
-            <h:form>
-                <s:validateAll>
-                    <h:panelGrid columns="2">
-                        Username: <h:inputText value="#{user.username}" required="true"/>
-                        Real Name: <h:inputText value="#{user.name}" required="true"/>
-                        Password: <h:inputSecret value="#{user.password}" required="true"/>
-                    </h:panelGrid>
-                </s:validateAll>
-                <h:messages/>
-                <h:commandButton value="Register" action="#{register.register}"/>
-            </h:form>
-        </f:view>
-    </h:head>
-</h:body>
 
+    <h:form id="userForm">
+        <h4 style="margin-top: 30px; margin-bottom: 20px; display: block; text-align: center;" class="welcomeText" >User form</h4>
+        <p:panelGrid columns="2" styleClass="form">
+            <h:outputText value="User ID:" />
+            <p:inputText id="userId" value="#{userBean.user.id}" required="true" />
+
+            <h:outputText value="First Name:" />
+            <p:inputText id="firstName" value="#{userBean.user.firstName}" required="true" />
+
+            <h:outputText value="Last Name:" />
+            <p:inputText id="lastName" value="#{userBean.user.lastName}" required="true" />
+
+            <h:outputText value="Phone:" />
+            <p:inputText id="phone" value="#{userBean.user.phone}" required="true" />
+
+            <h:outputText value="Email:" />
+            <p:inputText id="email" value="#{userBean.user.email}" required="true" />
+
+            <div class="button-container">
+                <p:commandButton value="Submit" actionListener="#{userBean.saveUser}" update="userTable"/>
+            </div>
+
+        </p:panelGrid>
+    </h:form>
+
+    <p:dataTable id="userTable" var="user" value="#{userBean.testUsers}" styleClass="table mt-4">
+        <p:column headerText="ID">
+            <h:outputText value="#{user.id}" />
+        </p:column>
+        <p:column headerText="First Name">
+            <h:outputText value="#{user.firstName}" />
+        </p:column>
+        <p:column headerText="Last Name">
+            <h:outputText value="#{user.lastName}" />
+        </p:column>
+        <p:column headerText="Phone">
+            <h:outputText value="#{user.phone}" />
+        </p:column>
+        <p:column headerText="Email">
+            <h:outputText value="#{user.email}" />
+        </p:column>
+        <p:column headerText="Actions">
+            <div class="button-container">
+                <p:commandButton title="Edit" actionListener="#{userBean.updateUser(user)}" update=":userForm" styleClass="btn" />
+                <p:commandButton title="Delete" actionListener="#{userBean.deleteUser(user.id)}" update=":userTable" styleClass="btn" />
+<!--                <p:commandButton icon="ui-icon-pencil" title="Edit" actionListener="#{userBean.updateUser(user)}" update=":userForm" styleClass="btn" />-->
+<!--                <p:commandButton icon="ui-icon-trash" title="Delete" actionListener="#{userBean.deleteUser(user.id)}" update=":userTable" styleClass="btn" />-->
+            </div>
+        </p:column>
+    </p:dataTable>
+</h:body>
 </html>

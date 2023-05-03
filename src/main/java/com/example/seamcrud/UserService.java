@@ -7,7 +7,7 @@ import java.util.List;
 
 @Name("userService")
 public class UserService {
-    @In
+//    @In
     private UserDAO userDAO;
 
     public List<User> getAllUsers() {

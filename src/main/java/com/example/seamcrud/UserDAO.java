@@ -1,12 +1,15 @@
 package com.example.seamcrud;
 
 
+import org.jboss.seam.annotations.Name;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
+@Name("userService")
 public class UserDAO {
     @PersistenceContext(unitName = "SeamPrimeFacesGlassfishPU")
     private EntityManager entityManager;
