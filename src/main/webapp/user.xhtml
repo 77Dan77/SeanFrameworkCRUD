@@ -63,10 +63,10 @@
         </p:column>
         <p:column headerText="Actions">
             <div class="button-container">
-                <p:commandButton title="Edit" actionListener="#{userBean.updateUser(user)}" update=":userForm" styleClass="btn" />
-                <p:commandButton title="Delete" actionListener="#{userBean.deleteUser(user.id)}" update=":userTable" styleClass="btn" />
-<!--                <p:commandButton icon="ui-icon-pencil" title="Edit" actionListener="#{userBean.updateUser(user)}" update=":userForm" styleClass="btn" />-->
-<!--                <p:commandButton icon="ui-icon-trash" title="Delete" actionListener="#{userBean.deleteUser(user.id)}" update=":userTable" styleClass="btn" />-->
+<!--                <p:commandButton title="Edit" actionListener="#{userBean.updateUser(user)}" update=":userForm" styleClass="btn" />-->
+<!--                <p:commandButton title="Delete" actionListener="#{userBean.deleteUser(user.id)}" update=":userTable" styleClass="btn" />-->
+                <p:commandButton icon="ui-icon-pencil" title="Edit" actionListener="#{userBean.updateUser(user)}" update=":userForm" styleClass="btn" style="margin-right: 10px;"/>
+                <p:commandButton icon="ui-icon-trash" title="Delete" actionListener="#{userBean.deleteUser(user.id)}" update=":userTable" styleClass="btn" />
             </div>
         </p:column>
     </p:dataTable>

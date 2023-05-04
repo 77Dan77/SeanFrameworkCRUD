@@ -5,9 +5,7 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,7 +32,7 @@ public class UserBean {
     }
 
     public void saveUser() {
-        testUsers.add(user); //
+        testUsers.add(user);
         LOGGER.log(Level.INFO, user.toString());
         LOGGER.log(Level.INFO, String.valueOf(testUsers.size()));
         LOGGER.log(Level.INFO, testUsers.get(testUsers.size()-1).toString());
@@ -43,14 +41,13 @@ public class UserBean {
 //        loadUsers();
     }
 
-    public void updateUser(User user) {
-        for (User u:testUsers) {
-            if (u.equals(user)){
-                u.setId(user.getId());
-                u.setFirstName(user.getFirstName());
-                u.setLastName(user.getLastName());
-                u.setPhone(user.getPhone());
-                u.setEmail(user.getEmail());
+    public void updateUser(User updatedUser) {
+        for (int i = 0; i < testUsers.size(); i++) {
+            if (Objects.equals(testUsers.get(i).getId(), updatedUser.getId())) {
+                testUsers.set(i, updatedUser);
+                LOGGER.log(Level.INFO, updatedUser.toString() + " ---------------- ----");
+                LOGGER.log(Level.INFO, testUsers.get(i).toString() + "-----------------------------");
+                break;
             }
         }
 //        userService.updateUser(user);
@@ -58,7 +55,13 @@ public class UserBean {
     }
 
     public void deleteUser(Long id) {
-        testUsers.removeIf(user -> user.getId().equals(id));
+//        Iterator<User> iterator = testUsers.iterator();
+//        while (iterator.hasNext()) {
+//            User u = iterator.next();
+//            if (Objects.equals(u.getId(), id)) {
+//                iterator.remove();
+//            }
+//        }
 
 //        userService.deleteUser(id);
 //        loadUsers();

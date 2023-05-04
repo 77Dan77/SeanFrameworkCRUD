@@ -69,7 +69,7 @@ public class User {
         this.phone = phone;
         this.email = email;
     }
-
+//
     public User(Long id, String firstName, String lastName, String phone, String email) {
         this.id = id;
         this.firstName = firstName;
