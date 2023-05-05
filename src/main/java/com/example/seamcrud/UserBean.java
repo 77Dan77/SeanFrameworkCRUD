@@ -1,19 +1,24 @@
 package com.example.seamcrud;
 
 import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Scope(ScopeType.CONVERSATION)
 @Name("userBean")
-@Scope(ScopeType.PAGE)
-public class UserBean {
-//    @In
-    private UserService userService;
+@AutoCreate
+public class UserBean implements Serializable {
+    @In
+    private UserServiceLocal userService;
 
     private User user = new User();
     private List<User> users;
@@ -22,23 +27,23 @@ public class UserBean {
                                           new User(2L, "Ali", "Iz", "88005553535", "al01kz@gmail.com")));
     private static final Logger LOGGER = Logger.getLogger(UserBean.class.getName());
 
-
-    public List<User> getTestUsers() {
-        return testUsers;
-    }
+//    @PostConstruct
+//    public void init() {
+//        loadUsers();
+//    }
 
     public void loadUsers() {
-        users = userService.getAllUsers();
+        users = userService.findAllUsers();
     }
 
     public void saveUser() {
-        testUsers.add(user);
         LOGGER.log(Level.INFO, user.toString());
         LOGGER.log(Level.INFO, String.valueOf(testUsers.size()));
         LOGGER.log(Level.INFO, testUsers.get(testUsers.size()-1).toString());
-//        userService.addUser(user);
+        User user1 = new User(5L, "DAN", "Zh", "0343434", "dsfsdfdsfds");
+        userService.createUser(user1);
         user = new User();
-//        loadUsers();
+        loadUsers();
     }
 
     public void updateUser(User updatedUser) {
@@ -50,29 +55,21 @@ public class UserBean {
                 break;
             }
         }
-//        userService.updateUser(user);
-//        loadUsers();
+        userService.updateUser(user);
+        loadUsers();
     }
 
     public void deleteUser(Long id) {
-//        Iterator<User> iterator = testUsers.iterator();
-//        while (iterator.hasNext()) {
-//            User u = iterator.next();
-//            if (Objects.equals(u.getId(), id)) {
-//                iterator.remove();
-//            }
-//        }
+        Iterator<User> iterator = testUsers.iterator();
+        while (iterator.hasNext()) {
+            User u = iterator.next();
+            if (Objects.equals(u.getId(), id)) {
+                iterator.remove();
+            }
+        }
 
-//        userService.deleteUser(id);
-//        loadUsers();
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+        userService.deleteUser(id);
+        loadUsers();
     }
 
     public User getUser() {

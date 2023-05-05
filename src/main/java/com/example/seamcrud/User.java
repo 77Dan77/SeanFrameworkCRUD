@@ -3,14 +3,11 @@ package com.example.seamcrud;
 import org.jboss.seam.annotations.Name;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-//import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.RequestScoped;
-//import javax.faces.event.ActionEvent;
-
-@Name("user")
 @Entity
-@Table(name = "user")
+@Name("user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
